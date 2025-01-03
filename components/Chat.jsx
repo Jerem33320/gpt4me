@@ -25,10 +25,12 @@ const Chat = () => {
 
       const response = await generateChatResponse(messages);
 
+      console.log("res----------",response);
       if (!response) {
         toast.error('Something went wrong...');
         return;
       }
+      console.log("messages--------",messages)
       setMessages((prev) => [...prev, response.message]);
       const newTokens = await subtractTokens(userId, response.tokens);
       toast.success(`${newTokens} tokens remaining...`);
@@ -41,10 +43,23 @@ const Chat = () => {
     setText('');
     mutate();
   };
-
+console.log("messages",messages)
   return (
     <div className='min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]'>
       <div>
+        {/* {messages.map((message, index) => {
+          const avatar = index % 2 ? '👤' : '🤖';
+          const bcg = index % 2 ? 'bg-base-200' : 'bg-base-100';
+          return (
+            <div
+              key={index}
+              className={`${bcg} flex py-6 -mx-8 px-8 text-xl leading-loose border-b border-base-300`}
+            >
+              <span className='mr-4'>{avatar}</span>
+              <p className='max-w-3xl'>{message}</p>
+            </div>
+          );
+        })} */}
         {messages.map(({ role, content }, index) => {
           const avatar = role == 'user' ? '👤' : '🤖';
           const bcg = role === 'user' ? 'bg-base-200' : 'bg-base-100';

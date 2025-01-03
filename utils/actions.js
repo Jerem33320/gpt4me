@@ -1,71 +1,27 @@
 'use server';
-import LlamaAI from 'llamaai';
-
 import prisma from './db';
 import { revalidatePath } from 'next/cache';
-
-const llamaai = new LlamaAI({
-  apiKey: process.env.LLAMAAI_API_KEY,
-});
+import { groq } from '@ai-sdk/groq';
+import { generateText } from 'ai';
 
 
+// Check this to see custom for build
+// https://sdk.vercel.ai/providers/ai-sdk-providers/groq
+const MY_API_KEY = process.env.GROQ_API_KEY;
 
-// Build the Request
-const apiRequestJson = {
-  "messages": [
-      {"role": "user", "content": "What is the weather like in Boston?"},
-  ],
-  "functions": [
-      {
-          "name": "get_current_weather",
-          "description": "Get the current weather in a given location",
-          "parameters": {
-              "type": "object",
-              "properties": {
-                  "location": {
-                      "type": "string",
-                      "description": "The city and state, e.g. San Francisco, CA",
-                  },
-                  "days": {
-                      "type": "number",
-                      "description": "for how many days ahead you wants the forecast",
-                  },
-                  "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
-              },
-          },
-          "required": ["location", "days"],
-      }
-  ],
-  "stream": false,
-  "function_call": "get_current_weather",
- };
-
- // Execute the Request
-  // llamaAPI.run(apiRequestJson)
-  //   .then(response => {
-  //     // Process response
-  //   })
-  //   .catch(error => {
-  //     // Handle errors
-  //   });
 
 export const generateChatResponse = async (chatMessages) => {
   try {
-    console.log("chatMessages", chatMessages);
-    console.log("llamaai", llamaai);
-    const response = await llamaai.chat.create({
-      messages: [
-        { role: 'system', content: 'you are a helpful assistant' },
-        ...chatMessages,
-      ],
-      // model: 'gpt-3.5-turbo',
-      temperature: 0,
-      max_tokens: 100,
+    const { text } = await generateText({
+      model: groq('gemma2-9b-it'),
+      prompt: chatMessages.reverse()[0].content,
     });
+    console.log(text);
+
     return {
-      message: response.choices[0].message,
-      tokens: response.usage.total_tokens,
-    };
+        message: text,
+        tokens: 1000,
+      };
   } catch (error) {
     console.log(error);
     return null;
