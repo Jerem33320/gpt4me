@@ -18,13 +18,13 @@ plugins: [require('@tailwindcss/typography'), require('daisyui')],
 }
 ```
 
-##  Create Pages
+## Create Pages
 
 - create following pages - chat, profile, tours
 - group them together with route group (dashboard)
 - setup one layout file for all three pages
 
-##  Home Page
+## Home Page
 
 - setup title and description in the layout
 - code home page (DaisyUI Hero Component)
@@ -127,7 +127,7 @@ export const config = {
 };
 ```
 
-##  Custom SignUp and SignIn Pages
+## Custom SignUp and SignIn Pages
 
 - follow the docs and setup custom pages
 - use clerk's component
@@ -186,13 +186,13 @@ import { FaBeer } from 'react-icons/fa';
 
 ```
 
-##  Setup Dashboard Layout
+## Setup Dashboard Layout
 
 - setup layout for for all pages
 - DaisyUI Drawer Component
   [DaisyUI](https://daisyui.com/components/drawer/)
 
-## Solution
+##
 
 - create components/sidebar
 
@@ -275,7 +275,7 @@ const SidebarHeader = () => {
 export default SidebarHeader;
 ```
 
-##  NavLinks
+## NavLinks
 
 1. **Import Dependencies:**
 
@@ -330,7 +330,7 @@ const NavLinks = () => {
 export default NavLinks;
 ```
 
-##  MemberProfile
+## MemberProfile
 
 1. **Import Dependencies:**
 
@@ -374,7 +374,7 @@ const MemberProfile = async () => {
 export default MemberProfile;
 ```
 
-##  ThemeToggle
+## ThemeToggle
 
 - setup themes in tailwind.config.js
 
@@ -456,7 +456,7 @@ const ThemeToggle = () => {
 export default ThemeToggle;
 ```
 
-##  Profile Page
+## Profile Page
 
 1. **Import Dependencies:**
 
@@ -478,7 +478,7 @@ const UserProfilePage = () => {
 export default UserProfilePage;
 ```
 
-##  Add React-Hot-Toast Library
+## Add React-Hot-Toast Library
 
 - setup app/providers.js
 - import/add Toaster component
@@ -507,7 +507,7 @@ app/layout.js
 <Providers>{children}</Providers>
 ```
 
-##  Chat Structure
+## Chat Structure
 
 1. **Import Dependencies:**
 
@@ -882,7 +882,7 @@ return (
 );
 ```
 
-##  New Tour Page
+## New Tour Page
 
 - create NewTour and TourInfo components
 - create New Tour page : app/(dashboard)/tours/new-tour/page.js
@@ -1465,7 +1465,7 @@ const ToursPage = () => {
 export default ToursPage;
 ```
 
-##  Single Tour Page
+## Single Tour Page
 
 - setup page and get info on specific tour
 
@@ -1667,7 +1667,7 @@ export default SingleTourPage;
 - delete folders
 - remove env variables
 
-##  Token Logic
+## Token Logic
 
 OPTIONAL !!!
 
