@@ -1,19 +1,64 @@
 'use server';
-import OpenAI from 'openai';
+import LlamaAI from 'llamaai';
+
 import prisma from './db';
 import { revalidatePath } from 'next/cache';
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+
+const llamaai = new LlamaAI({
+  apiKey: process.env.LLAMAAI_API_KEY,
 });
+
+
+
+// Build the Request
+const apiRequestJson = {
+  "messages": [
+      {"role": "user", "content": "What is the weather like in Boston?"},
+  ],
+  "functions": [
+      {
+          "name": "get_current_weather",
+          "description": "Get the current weather in a given location",
+          "parameters": {
+              "type": "object",
+              "properties": {
+                  "location": {
+                      "type": "string",
+                      "description": "The city and state, e.g. San Francisco, CA",
+                  },
+                  "days": {
+                      "type": "number",
+                      "description": "for how many days ahead you wants the forecast",
+                  },
+                  "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+              },
+          },
+          "required": ["location", "days"],
+      }
+  ],
+  "stream": false,
+  "function_call": "get_current_weather",
+ };
+
+ // Execute the Request
+  // llamaAPI.run(apiRequestJson)
+  //   .then(response => {
+  //     // Process response
+  //   })
+  //   .catch(error => {
+  //     // Handle errors
+  //   });
 
 export const generateChatResponse = async (chatMessages) => {
   try {
-    const response = await openai.chat.completions.create({
+    console.log("chatMessages", chatMessages);
+    console.log("llamaai", llamaai);
+    const response = await llamaai.chat.create({
       messages: [
         { role: 'system', content: 'you are a helpful assistant' },
         ...chatMessages,
       ],
-      model: 'gpt-3.5-turbo',
+      // model: 'gpt-3.5-turbo',
       temperature: 0,
       max_tokens: 100,
     });
@@ -43,7 +88,7 @@ Once you have a list, create a one-day tour. Response should be  in the followin
 "stops" property should include only three stops.
 If you can't find info on exact ${city}, or ${city} does not exist, or it's population is less than 1, or it is not located in the following ${country},   return { "tour": null }, with no additional characters.`;
   try {
-    const response = await openai.chat.completions.create({
+    const response = await llamaai.chat.completions.create({
       messages: [
         { role: 'system', content: 'you are a tour guide' },
         {
@@ -125,7 +170,7 @@ export const getSingleTour = async (id) => {
 
 export const generateTourImage = async ({ city, country }) => {
   try {
-    const tourImage = await openai.images.generate({
+    const tourImage = await llamaai.images.generate({
       prompt: `a panoramic view of teh ${city} ${country}`,
       n: 1,
       size: '512x512',

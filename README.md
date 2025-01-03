@@ -37,7 +37,7 @@ app/layout.js
 export const metadata = {
   title: 'GPT4Me',
   description:
-    'GPT4Me: Your AI language companion. Powered by OpenAI, it enhances your conversations, content creation, and more!',
+    'GPT4Me: Your AI language companion. Powered by LlamaAI, it enhances your conversations, content creation, and more!',
 };
 ```
 
@@ -52,7 +52,7 @@ const HomePage = () => {
         <div className='max-w-md'>
           <h1 className='text-6xl font-bold text-primary'>GPT4Me</h1>
           <p className='py-6 text-lg leading-loose'>
-            GPT4Me: Your AI language companion. Powered by OpenAI, it
+            GPT4Me: Your AI language companion. Powered by LlamaAI, it
             enhances your conversations, content creation, and more!
           </p>
           <Link href='/chat' className='btn btn-secondary '>
@@ -755,32 +755,26 @@ const Chat = () => {
 };
 ```
 
-## OPENAI API
-
-[Pricing](https://openai.com/pricing)
-
-```sh
-npm i openai
-```
+## LLAMA API
 
 - create API KEY
 - save in .env.local
 
 ```js
-OPENAI_API_KEY=....
+LLAMAAI_API_KEY=....
 ```
 
 utils/actions.js
 
 ```js
-import OpenAI from 'openai';
+import LlamaAI from 'llamaai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+const llamaai = new LlamaAI({
+  apiKey: process.env.LLAMAAI_API_KEY,
 });
 
 export const generateChatResponse = async (message) => {
-  const response = await openai.chat.completions.create({
+  const response = await llamaai.chat.completions.create({
     messages: [
       { role: 'system', content: 'you are a helpful assistant' },
       { role: 'user', content: message };
@@ -801,7 +795,7 @@ utils/actions
 ```js
 export const generateChatResponse = async (chatMessages) => {
   try {
-    const response = await openai.chat.completions.create({
+    const response = await llamaai.chat.completions.create({
       messages: [
         { role: 'system', content: 'you are a helpful assistant' },
         ...chatMessages,
@@ -1100,7 +1094,7 @@ Once you have a list, create a one-day tour. Response should be in the following
 If you can't find info on exact ${city}, or ${city} does not exist, or it's population is less than 1, or it is not located in the following ${country} return { "tour": null }, with no additional characters.`;
 
   try {
-    const response = await openai.chat.completions.create({
+    const response = await llamaai.chat.completions.create({
       messages: [
         { role: 'system', content: 'you are a tour guide' },
         { role: 'user', content: query },
@@ -1517,7 +1511,7 @@ actions.js
 ```js
 export const generateTourImage = async ({ city, country }) => {
   try {
-    const tourImage = await openai.images.generate({
+    const tourImage = await llamaai.images.generate({
       prompt: `a panoramic view of the ${city} ${country}`,
       n: 1,
       size: '512x512',
@@ -1688,7 +1682,7 @@ actions.js
 ```js
 export const generateChatResponse = async (chatMessages) => {
   try {
-    const response = await openai.chat.completions.create({
+    const response = await llamaai.chat.completions.create({
       max_tokens: 100,
     });
 

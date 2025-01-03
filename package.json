@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -13,8 +13,10 @@
     "@prisma/client": "^5.5.2",
     "@tanstack/react-query": "^5.8.1",
     "@tanstack/react-query-devtools": "^5.8.1",
+    "axios": "^1.6.2",
+    "llamaai": "^1.0.4",
+    "mongodb": "^6.12.0",
     "next": "14.2.1",
-    "openai": "^4.14.2",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
