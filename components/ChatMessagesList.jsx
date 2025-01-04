@@ -10,13 +10,13 @@ const ChatMessagesList = ({messages, isPending}) => {
             return (
                 <div
                     key={index}
-                    className={`grid ${bcg} py-2 -mx-8 px-8 text-xl leading-loose border-b border-base-300 inline-block w-full`}
+                    className={`grid ${bcg} py-2 -mx-8 px-8 text-l leading-loose border-b border-base-300 inline-block w-full`}
                 >
                 {
                 index % 2 ? 
-                    <p className='max-w-3xl'>
-                        <ReactMarkdown>{content}</ReactMarkdown>
-                        <span className='ml-4'>{avatar}</span>
+                    <p className='max-w-3xl grid justify-items-end'>
+                        <span className='ml-4 '>{avatar}</span>
+                        <ReactMarkdown className='justify-items-start'>{content}</ReactMarkdown>
                         <CopyTextBtn messages={messages} index={index}/>
                     </p> 
                 :
