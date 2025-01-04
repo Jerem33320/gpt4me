@@ -4,20 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@ai-sdk/groq": "^1.0.9",
     "@clerk/nextjs": "^5.0.1",
-    "@prisma/client": "^5.5.2",
     "@tanstack/react-query": "^5.8.1",
     "@tanstack/react-query-devtools": "^5.8.1",
     "ai": "^4.0.25",
     "axios": "^1.6.2",
-    "llamaai": "^1.0.4",
-    "mongodb": "^6.12.0",
     "next": "14.2.1",
     "openai": "^4.77.0",
     "react": "^18",
@@ -30,7 +27,6 @@
     "autoprefixer": "^10.0.1",
     "daisyui": "^3.9.4",
     "postcss": "^8",
-    "prisma": "^5.5.2",
     "tailwindcss": "^3.4.1"
   }
 }
