@@ -5,22 +5,21 @@ import {
 } from '@/utils/actions';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import CopyTextBtn from './CopyTextBtn';
 // import toast from 'react-hot-toast';
 
 const Chat = () => {
   const [text, setText] = useState('');
   const [messages, setMessages] = useState([]);
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending, error, reset } = useMutation({
     mutationFn: async () => {
       const response = await generateChatResponse(messages);
 
-      console.log("res----------",response);
       if (!response) {
         // toast.error('Something went wrong...');
         console.log("Something went wrong...");
         return;
       }
-      console.log("messages--------",messages)
       setMessages((prev) => [...prev, {content: response.content}]);
       return response
     },
@@ -33,7 +32,6 @@ const Chat = () => {
     mutate([...messages, { content: text }]);
   };
 
-console.log("messages",messages)
   return (
     <div className='min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]'>
       <div>
@@ -47,14 +45,15 @@ console.log("messages",messages)
             >
               {
               index % 2 ? 
-                <p className='max-w-3xl'>{content}<span className='ml-4'>{avatar}</span></p> 
+                <p className='max-w-3xl'>{content}<span className='ml-4'>{avatar}</span>
+                   <CopyTextBtn messages={messages} index={index}/>
+                </p> 
               :
                 <p className='max-w-3xl'><span className='mr-4'>{avatar}</span>{content}</p>
             }
             </div>
           );
         })}
-
         {isPending ? <span className="loading loading-bars loading-xs"></span>: null}
       </div>
       <form onSubmit={handleSubmit} className='max-w-4xl pt-12'>
@@ -64,7 +63,6 @@ console.log("messages",messages)
               type="text" 
               className="grow" 
               placeholder="Chat..." 
-              // className='input input-bordered join-item w-full'
               value={text}
               required
               onChange={(e) => setText(e.target.value)}
