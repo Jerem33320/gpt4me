@@ -10,7 +10,7 @@ import { useState } from 'react';
 const Chat = () => {
   const [text, setText] = useState('');
   const [messages, setMessages] = useState([]);
-  const { mutate, isPending, data } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async () => {
       const response = await generateChatResponse(messages);
 
@@ -22,7 +22,7 @@ const Chat = () => {
       }
       console.log("messages--------",messages)
       setMessages((prev) => [...prev, {content: response.content}]);
-      setText(response.content);
+      return response
     },
   });
   const handleSubmit = (e) => {
@@ -30,24 +30,27 @@ const Chat = () => {
     const query = { content: text };
     setMessages((prev) => [...prev, query]);
     setText('');
-    mutate();
+    mutate([...messages, { content: text }]);
   };
 
-console.log("data------", data)
 console.log("messages",messages)
   return (
     <div className='min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]'>
       <div>
         {messages.map(({content}, index) => {
           const avatar = index % 2 ?  '🤖' : '👤';
-          const bcg = index % 2 ? 'bg-base-100' : 'bg-base-200';
+          const bcg = index % 2 ? 'bg-base-100 justify-items-end' : 'bg-base-200 justify-items-start';
           return (
             <div
               key={index}
-              className={`${bcg} flex py-6 -mx-8 px-8 text-xl leading-loose border-b border-base-300`}
+              className={`grid ${bcg} py-2 -mx-8 px-8 text-xl leading-loose border-b border-base-300 inline-block w-full`}
             >
-              <span className='mr-4'>{avatar}</span>
-              <p className='max-w-3xl'>{content}</p>
+              {
+              index % 2 ? 
+                <p className='max-w-3xl'>{content}<span className='ml-4'>{avatar}</span></p> 
+              :
+                <p className='max-w-3xl'><span className='mr-4'>{avatar}</span>{content}</p>
+            }
             </div>
           );
         })}
@@ -56,11 +59,11 @@ console.log("messages",messages)
       </div>
       <form onSubmit={handleSubmit} className='max-w-4xl pt-12'>
         <div className='join w-full'>
-          <label className="input input-bordered flex items-center gap-2">
+          <label className="input flex items-center gap-2 focus:outline-none focus:shadow-none w-full">
             <input 
               type="text" 
               className="grow" 
-              placeholder="Search" 
+              placeholder="Chat..." 
               // className='input input-bordered join-item w-full'
               value={text}
               required
@@ -83,7 +86,6 @@ console.log("messages",messages)
             </svg>
           </button>
           </label>
-          <button className='btn btn-primary join-item' onClick={() => setText("")}>Clear Input</button>
         </div>
       </form>
     </div>

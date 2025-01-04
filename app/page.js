@@ -7,13 +7,12 @@ const HomePage = () => {
         <div className='max-w-md'>
           <h1 className='text-6xl font-bold text-primary'>GPT4Me </h1>
           <p className='py-6 text-lg leading-loose'>
-            GPT4Me: Your AI language companion. Powered by OpenAI, it
-            enhances your conversations, content creation, and more!
+            Votre compagnon IA, il pimente vos conversations, la création de contenu et bien plus encore!
             Pas de sauvegarde en base de données.
             Pas de context de conversation donc bien préciser sa question.
           </p>
           <Link href='/chat' className='btn btn-secondary'>
-            Get Started
+            Entrer
           </Link>
         </div>
       </div>
