@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown';
 import CopyTextBtn from './CopyTextBtn';
 
 const ChatMessagesList = ({messages, isPending}) => {
@@ -13,8 +14,10 @@ const ChatMessagesList = ({messages, isPending}) => {
                 >
                 {
                 index % 2 ? 
-                    <p className='max-w-3xl line-clamp-4'>{content}<span className='ml-4'>{avatar}</span>
-                    <CopyTextBtn messages={messages} index={index}/>
+                    <p className='max-w-3xl'>
+                        <ReactMarkdown>{content}</ReactMarkdown>
+                        <span className='ml-4'>{avatar}</span>
+                        <CopyTextBtn messages={messages} index={index}/>
                     </p> 
                 :
                     <p className='max-w-3xl'><CopyTextBtn messages={messages} index={index}/><span className='mr-4'>{avatar}</span>{content}</p>

@@ -9,15 +9,13 @@ import { generateText } from 'ai';
 
 export const generateChatResponse = async (chatMessages) => {
   try {
-    console.log("chatMessages",chatMessages)
     const { text } = await generateText({
       model: groq('gemma2-9b-it'),
       prompt: chatMessages.reverse()[0].content,
     });
-    console.log(text);
 
     return {
-        content: text,
+       content: text,
     };
   } catch (error) {
     console.log(error);
