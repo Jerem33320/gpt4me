@@ -3,14 +3,14 @@ import CopyTextBtn from './CopyTextBtn';
 
 const ChatMessagesList = ({messages, isPending}) => {
     return (
-        <div>
+        <div className='h-[calc(100vh-10rem)] overflow-y-auto'>
             {messages.map(({content}, index) => {
             const avatar = index % 2 ?  '🤖' : '👤';
             const bcg = index % 2 ? 'bg-base-100 justify-items-end' : 'bg-base-200 justify-items-start';
             return (
                 <div
                     key={index}
-                    className={`grid ${bcg} py-2 -mx-8 px-8 text-l leading-loose border-b border-base-300 inline-block w-full`}
+                    className={`grid ${bcg} py-2 mx-2 px-8 text-l leading-loose border-b border-base-300 inline-block w-full`}
                 >
                 {
                 index % 2 ? 
