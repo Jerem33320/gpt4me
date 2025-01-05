@@ -35,7 +35,7 @@ const Chat = () => {
   };
 
   return (
-    <div className='h-[calc(100vh-10rem)]'>
+    <div className='h-[calc(100vh-10rem)] overflow-y-scroll overflow-x-hidden'>
       <ChatMessagesList messages={messages} isPending={isPending}/>
       <ChatInput handleSubmit={handleSubmit} setText={setText} text={text} isPending={isPending}/>
     </div>
