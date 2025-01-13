@@ -3,7 +3,7 @@ import CopyTextBtn from './CopyTextBtn';
 
 const ChatMessagesList = ({messages, isPending}) => {
     return (
-        <div className='h-[calc(100vh-10rem)] flex flex-col-reverse justify-end'>
+        <div className='flex flex-col justify-start'>
             {messages.map(({content}, index) => {
             const avatar = index % 2 ?  '🤖' : '👤';
             const bcg = index % 2 ? 'bg-base-100 justify-items-end' : 'bg-base-200 justify-items-start';

@@ -17,7 +17,7 @@ const ThemeToggle = () => {
   };
   
   return (
-    <button onClick={toggleTheme} className='btn btn-sm btn-outline'>
+    <button onClick={toggleTheme} className='btn btn-sm btn-outline fixed right-4 top-10'>
       {theme === 'forest' ? (
         <BsSunFill className='h-4 w-4' />
       ) : (
