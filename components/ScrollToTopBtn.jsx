@@ -1,5 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
+import { IoMdArrowDropupCircle } from "react-icons/io";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
 
 const ScrollToTopBtn = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,20 +39,20 @@ const ScrollToTopBtn = () => {
   }, []);
 
   return (
-    <>
+    <div className="fixed z-10 h-1/4 top-6 left-2 flex flex-col space-around">
         <button
             onClick={scrollToTop}
-            className={`fixed z-10 flex btn btn-accent justify-center top-8 left-10 pt-1 border-0 w-8 h-8 rounded-full shadow-md  text-white text-lg font-semibold transition-colors duration-300 ${isVisible ? 'block' : 'hidden'}`}
+            className={`btn btn-ghost transition-colors duration-300 hover:bg-transparent ${isVisible ? 'block' : 'hidden'}`}
         >
-            ⬆
+            <IoMdArrowDropupCircle className='h-full w-full text-accent hover:text-accent-focus'/>
         </button>
         <button
             onClick={scrollToBottom}
-            className={`fixed z-10 flex btn btn-neutral justify-center top-8 left-30 pt-1 border-0 w-8 h-8 rounded-full shadow-md  text-white text-lg font-semibold transition-colors duration-300 ${isVisible ? 'block' : 'hidden'}`}
+            className={`btn btn-ghost transition-colors duration-300 hover:bg-transparent ${isVisible ? 'block' : 'hidden'}`}
         >
-            ⬇
+            <IoMdArrowDropdownCircle className='h-full w-full text-primary hover:text-primary-focus'/>
         </button>
-    </>
+    </div>
   );
 };
 
