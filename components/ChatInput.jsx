@@ -8,7 +8,7 @@ const ChatInput = ({handleSubmit, setText, text, isPending}) => {
         theme = window.localStorage.getItem('theme');
     }
 
-  return (
+    return (
     <footer className="flex relative h-48 w-full bottom-0 bg-neutral text-neutral-content flex-col justify-around items-center p-2">
         <form onSubmit={handleSubmit} className="w-full px-6 flex items-center mx-auto">   
             <textarea type="text" value={text}
