@@ -14,6 +14,7 @@ const ThemeToggle = () => {
     const newTheme = theme === themes.forest ? themes.corporate : themes.forest;
     document.documentElement.setAttribute('data-theme', newTheme);
     setTheme(newTheme);
+    if (typeof window !== 'undefined') window.localStorage.setItem('theme', newTheme);
   };
   
   return (

@@ -42,15 +42,15 @@ const ScrollToTopBtn = () => {
     <div className="fixed z-10 h-1/4 top-6 left-2 flex flex-col space-around">
         <button
             onClick={scrollToTop}
-            className={`btn btn-ghost h-16 w-16 transition-colors duration-300 hover:bg-transparent ${isVisible ? 'block' : 'hidden'}`}
+            className={`btn btn-ghost h-12 w-12 transition-colors duration-300 hover:bg-transparent ${isVisible ? 'block' : 'hidden'}`}
         >
-            <IoMdArrowDropupCircle className='h-16 w-16 text-accent hover:text-accent-focus'/>
+            <IoMdArrowDropupCircle className='h-12 w-12 text-accent hover:text-accent-focus'/>
         </button>
         <button
             onClick={scrollToBottom}
-            className={`btn btn-ghost h-16 w-16 transition-colors duration-300 hover:bg-transparent ${isVisible ? 'block' : 'hidden'}`}
+            className={`btn btn-ghost h-12 w-12 transition-colors duration-300 hover:bg-transparent ${isVisible ? 'block' : 'hidden'}`}
         >
-            <IoMdArrowDropdownCircle className='h-16 w-16 text-primary hover:text-primary-focus'/>
+            <IoMdArrowDropdownCircle className='h-12 w-12 text-primary hover:text-primary-focus'/>
         </button>
     </div>
   );
